@@ -38,4 +38,23 @@ Nov_10
 ```
 
 
+The dependent variable for this project is the estimated fire area per region. The area is aggregated per region and is not granulated to the point where I'll be able to plot them geographically. Therefore, we will assume that the fire area is conglomerated into one section of the region. We will also assume the variables regarding weather and vegetation to be uniformly distributed per region. 
+(This may not be exactly what we want, and further data collection might be done; please see Further Steps)
+
+We will also assume that natural fires tend to have a life expectancy and don't live perpetually(One tree won't burn until the end of time). However, the real risk is the expansion of fires. For example, although one tree stopped burning, the fire could have expanded to other trees creating a domino effect.
+
+Therefore, the dependent variable during modeling shouldn't be the area but the perimeter, circumference, or surface area of the fire. For this project, we will transform the estimated fire area to a radius by square rooting the estimated fire area:
+
+
+
+<!-- The distribution of the radii create a power-law-like or log-like distribution and therefore, I will once again transform the y dependent through log transformation. -->
+
+
+
 ## Preprocessing
+
+## Model
+
+
+## Further Steps
+
