@@ -58,3 +58,6 @@ Therefore, the dependent variable during modeling shouldn't be the area but the 
 
 ## Further Steps
 
+
+
+![2013NDVI](images/Australia2013NDVI.gif)
