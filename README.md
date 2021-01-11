@@ -23,7 +23,7 @@ The zipped data file includes the following:
 ```
 Nov_10
 └───Historical_Wildfires.csv
-│   └─── :: Contains data on fire activites in Australi from 2005.
+│   └─── :: Contains data on fire activites in Australia from 2005.
 └───HistoricalWeather.csv
 │   └─── :: Contains daily aggregates of weather including Precipitation
 │        :: Humidty, Soil water content, Solar Radiation, Temperature
@@ -36,7 +36,17 @@ Nov_10
     └─── :: Contains monthly vegetation values(min, max, mean, variance) 
          :: for each region
 ```
+The Historical_Wildfires dataset is based off satelite data MODIS (MOD14AL1/MYD14AL1) which highlights thermal analomies with a pixel resolution of 1000 meters. The "estimated fire area" was computed by multiplying the scan and track pixel sizes from the MCD14DL dataset which is derived from the MOD14AL1/MYD14AL. </br>
 
+The pixels represent 1km only directly below the satelite and the scan and track values are calculated due to in increasing resolution as the pixels approach the end of the picture. The scan and track represent the spatial resolution east to west and north to south respective. It's important to note that the all pixels do not represent 1km in spatial area and the resolution increases as the pixels are further away from the center. <br>
+
+Therefore, the estimated area is will be higher than the count of pixelated fire derived like below:
+
+
+![modis14A](https://cdn.earthdata.nasa.gov/conduit/upload/12068/MODIS_fire_ground_observation.png)
+: https://cdn.earthdata.nasa.gov/conduit/upload/12068/MODIS_fire_ground_observation.png
+
+## Feature Engineering
 
 The dependent variable for this project is the estimated fire area per region. The area is aggregated per region and is not granulated to the point where I'll be able to plot them geographically. Therefore, we will assume that the fire area is conglomerated into one section of the region. We will also assume the variables regarding weather and vegetation to be uniformly distributed per region. 
 (This may not be exactly what we want, and further data collection might be done; please see Further Steps)
@@ -51,7 +61,6 @@ Therefore, the dependent variable during modeling shouldn't be the area but the 
 
 
 
-## Preprocessing
 
 ## Model
 
