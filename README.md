@@ -36,7 +36,7 @@ Nov_10
     └─── :: Contains monthly vegetation values(min, max, mean, variance) 
          :: for each region
 ```
-The Historical_Wildfires dataset is based off satelite data MODIS (MOD14AL1/MYD14AL1) which highlights thermal analomies with a pixel resolution of 1000 meters. The "estimated fire area" was computed by multiplying the scan and track pixel sizes from the MCD14DL dataset which is derived from the MOD14AL1/MYD14AL. </br>
+The Historical_Wildfires dataset is based off satelite data MCD14DL (comprised from MOD14AL1/MYD14AL1) which highlights thermal analomies with a pixel resolution of 1000 meters. The "estimated fire area" was computed by multiplying the scan and track pixel sizes from the MCD14DL dataset which is derived from the MOD14AL1/MYD14AL. </br>
 
 The pixels represent 1km only directly below the satelite and the scan and track values are calculated due to in increasing resolution as the pixels approach the end of the picture. The scan and track represent the spatial resolution east to west and north to south respective. It's important to note that the all pixels do not represent 1km in spatial area and the resolution increases as the pixels are further away from the center. <br>
 
