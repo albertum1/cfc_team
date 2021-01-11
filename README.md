@@ -36,9 +36,9 @@ Nov_10
     └─── :: Contains monthly vegetation values(min, max, mean, variance) 
          :: for each region
 ```
-The Historical_Wildfires dataset is based off satelite data MCD14DL (comprised from MOD14AL1/MYD14AL1) which highlights thermal analomies with a pixel resolution of 1000 meters. The "estimated fire area" was computed by multiplying the scan and track pixel sizes from the MCD14DL dataset which is derived from the MOD14AL1/MYD14AL. </br>
+The Historical_Wildfires dataset is based off the MCD14DL dataset (comprised from MOD14AL1/MYD14AL1, which highlights thermal analomies with a pixel resolution of 1000 meters). The "estimated fire area" was computed by multiplying the scan and track pixel sizes from the MCD14DL. </br>
 
-The pixels represent 1km only directly below the satelite and the scan and track values are calculated due to in increasing resolution as the pixels approach the end of the picture. The scan and track represent the spatial resolution east to west and north to south respective. It's important to note that the all pixels do not represent 1km in spatial area and the resolution increases as the pixels are further away from the center. <br>
+The pixels from MODIS represent 1km only directly below the satelite and the scan and track values are calculated due to in increasing resolution as the pixels approach the end of the picture. The scan and track represent the spatial resolution east to west and north to south respective. It's important to note that the all pixels do not represent 1km in spatial area and the resolution increases as the pixels are further away from the center. <br>
 
 Therefore, the estimated area is will be higher than the count of pixelated fire derived like below:
 
@@ -53,8 +53,9 @@ The dependent variable for this project is the estimated fire area per region. T
 
 We will also assume that natural fires tend to have a life expectancy and don't live perpetually(One tree won't burn until the end of time). However, the real risk is the expansion of fires. For example, although one tree stopped burning, the fire could have expanded to other trees creating a domino effect.
 
-Therefore, the dependent variable during modeling shouldn't be the area but the perimeter, circumference, or surface area of the fire. For this project, we will transform the estimated fire area to a radius by square rooting the estimated fire area:
-
+Therefore, a feature that might be interesting would be the perimeter of the fire as well as the area. Since we do not know the the number of geographically separated fires I will create engineers with two assumptions:
+1. Assume the fire is conglomerated into one region and take the square root of the estimated area(leaving out the constants) as a feature.
+2. Assume the count of fires are all separated and have equal radius/length/height.  
 
 
 <!-- The distribution of the radii create a power-law-like or log-like distribution and therefore, I will once again transform the y dependent through log transformation. -->
