@@ -2,7 +2,7 @@
 Elvis C, Shruti Chaturvedi, Divyansh Choubisa, Tiffany Sung, Albert Um
 
 ## Objective
-The goal for this project is to forecast wildfires in Australia for February 2021. The estimated fire area represents the summation of fire activity in a 1km by 1km region. The Australian regions are 7 states:
+The goal of this project is to forecast wildfires in Australia for February 2021. The estimated fire area represents the summation of fire activity in a 1km by 1km region. The Australian 7 regions are:
 - NSW = New South Wales
 - NT = Northern Territory
 - QL = Queensland
@@ -36,11 +36,11 @@ Nov_10
     └─── :: Contains monthly vegetation values(min, max, mean, variance) 
          :: for each region
 ```
-The Historical_Wildfires dataset is based off the MCD14DL dataset (comprised from MOD14AL1/MYD14AL1, which highlights thermal analomies with a pixel resolution of 1000 meters). The dataset has daily time intervals ranging from 2005-01-01 to 2020-10-31'. The "estimated fire area" was computed by multiplying the scan and track pixel sizes from the MCD14DL. </br>
+The Historical_Wildfires dataset is based on the MCD14DL dataset (comprised of MOD14AL1/MYD14AL1, which highlights thermal anomalies with a pixel resolution of 1000 meters). The dataset has daily time intervals ranging from 2005-01-01 to 2020-10-31'. The "estimated fire area" was computed by multiplying the scan and track pixel sizes from the MCD14DL. </br>
 
-The pixels from MODIS represent 1km only directly below the satelite and the scan and track values are calculated due to in increasing resolution as the pixels approach the end of the picture. The scan and track represent the spatial resolution east to west and north to south respective. It's important to note that the all pixels do not represent 1km in spatial area and the resolution increases as the pixels are further away from the center. <br>
+The pixels from MODIS represent 1km only directly below the satellite, and the scan and track values are calculated due to increasing resolution as the pixels approach the end of the picture. The scan and track represent the spatial resolution east to west and north to south respective. It's important to note that all pixels do not represent 1km in a spatial area, and the resolution increases as the pixels are further away from the center. <br>
 
-Therefore, the estimated area is will be higher than the count of pixelated fire derived like below:
+Therefore, the estimated area will be higher than the count of pixelated fire derived below:
 
 
 ![modis14A](https://cdn.earthdata.nasa.gov/conduit/upload/12068/MODIS_fire_ground_observation.png)
@@ -56,7 +56,7 @@ The dependent variable for this project is the estimated fire area per region. T
 
 We will also assume that natural fires tend to have a life expectancy and don't live perpetually(One tree won't burn until the end of time). However, the real risk is the expansion of fires. For example, although one tree stopped burning, the fire could have expanded to other trees creating a domino effect.
 
-Therefore, a feature that might be interesting would be involving the perimeter of the fire. Since we do not know the the number of geographically separated fires I will create two features with respective assumptions:
+Therefore, a feature that might be interesting would be involving the perimeter of the fire. Since we do not know the number of geographically separated fires, I will create two features with respective assumptions:
 1. Assume the fire is conglomerated into one region and take the square root of the estimated area(leaving out the constants) as a feature.
 2. Assume the count of fires are all separated and have equal radius/length/height (No pixel of detected fire will touch another pixel). The feature will be created by square rooting the (fire area/ pixel count) then multiplying the pixel count to get the summation of the perimeters.
 
@@ -67,7 +67,7 @@ Therefore, a feature that might be interesting would be involving the perimeter 
 
 
 ## Model
-
+For train-test validation, we will separate 2005-01-01 to 2019-10-31 for our training set and test for 2019-11-01 to 2020-10-31.
 
 
 
