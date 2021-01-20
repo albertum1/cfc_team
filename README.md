@@ -11,7 +11,8 @@ The goal of this project is to forecast wildfires in Australia for February 2021
 - VI = Victoria
 - WA = Western Australia
 
-
+![EFA_subplots](images/Australia.png) <br>
+credit: https://www.touropia.com/regions-in-australia-map/
 
 ## Structure of Repository
 
@@ -48,6 +49,16 @@ Therefore, the estimated area will be higher than the count of pixelated fire de
 
 ## Data Exploration
 
+
+![EFA_subplots](images/EFA_subplots.png)
+Here I have plotted the daily estimated fire area per region. The land cover area differs for each region, nonetheless, the pattern of daily fire areas are not uniform across all regions.
+
+
+![EFA_subplots](images/EFA_distplots.png)
+Like most natural disasters, wildfires often come in power-law like distributions and therefore I log transformed for this plot to see the distributions of each region. This can be quickly interpretted that the distributions of fires are not uniform across the 7 regions.
+
+![EFA_subplots](images/EFA_MonthlylogScaled.png)
+I have plotted the median of each region by month to show the difference of distribution across the regions.
 
 ## Feature Engineering
 
