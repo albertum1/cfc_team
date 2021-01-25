@@ -58,6 +58,7 @@ Here I have plotted the daily estimated fire area per region. The land cover are
 Like most natural disasters, wildfires often come in power-law like distributions and therefore I log transformed for this plot to see the distributions of each region. This can be quickly interpretted that the distributions of fires are not uniform across the 7 regions.
 
 ![EFA_subplots](images/EFA_MonthlylogScaled.png)
+<br>
 I have plotted the median of each region by month to show the difference of distribution across the regions.
 
 ## Feature Engineering
@@ -72,8 +73,6 @@ Therefore, a feature that might be interesting would be involving the perimeter 
 2. Assume the count of fires are all separated and have equal radius/length/height (No pixel of detected fire will touch another pixel). The feature will be created by square rooting the (fire area/ pixel count) then multiplying the pixel count to get the summation of the perimeters.
 
 
-
-<!-- The distribution of the radii create a power-law-like or log-like distribution and therefore, I will once again transform the y dependent through log transformation. -->
 
 
 
