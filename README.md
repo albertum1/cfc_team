@@ -59,11 +59,11 @@ Like most natural disasters, wildfires often come in power-law like distribution
 
 ![EFA_subplots](images/EFA_MonthlylogScaled.png)
 <br>
-I have plotted the median of each region by month to show the difference of distribution across the regions.
+I have plotted the median of each region by month to show the difference of distribution across the regions. It looks as if there might be some seasonality depending on the region selected. Australia has spring season from September to November and summer seasons from December to February.
 
 ## Feature Engineering
 
-The dependent variable for this project is the estimated fire area per region. The area is aggregated per region and is not granulated to the point where I'll be able to plot them geographically. Therefore, we will assume that the fire area is conglomerated into one section of the region. We will also assume the variables regarding weather and vegetation to be uniformly distributed per region. 
+The dependent variable for this project is the estimated fire area per region. The data statistics are aggregated per region and are not granulated to the point where I'll be able to plot the datapoints geographically. The same thing applies to the weather and vegetation statistics.  Therefore, we will also assume the variables regarding wildfires, weather, and vegetation to be uniformly distributed per region. 
 (This may not be exactly what we want, and further data collection might be done; please see Further Steps)
 
 We will also assume that natural fires tend to have a life expectancy and don't live perpetually(One tree won't burn until the end of time). However, the real risk is the expansion of fires. For example, although one tree stopped burning, the fire could have expanded to other trees creating a domino effect.
@@ -73,15 +73,19 @@ Therefore, a feature that might be interesting would be involving the perimeter 
 2. Assume the count of fires are all separated and have equal radius/length/height (No pixel of detected fire will touch another pixel). The feature will be created by square rooting the (fire area/ pixel count) then multiplying the pixel count to get the summation of the perimeters.
 
 
-
+In addition, I will include the mean weather data (such as Temperature, Solar Radation, Humidity, Precipitation, Windspeed, etc.) per region and assume each region uniformly has the same mean despite difference in location. I will also include the mean vegetation index per region and assume the region uniformly has the same mean vegetation index per region.
 
 
 ## Model
-For train-test validation, we will separate 2005-01-01 to 2020-10-31 for our training set and validate on 2020-11-01 to 2021-01-31. We utilized diff
+For model validation, I separated 2005-01-01 to 2020-10-31 for my training set and 2020-11-01 to 2021-01-31 for my test set. 
 
-We utilized a Dilated CNN architecture derived from the repo by jEddy92 found [here](https://github.com/JEddy92/TimeSeries_Seq2Seq). <br>
-In short, the model takes 
-The architecture is a variation of the [WaveNet Model](https://deepmind.com/blog/article/wavenet-generative-model-raw-audio)
+I then windowed the dataset with an input shape of 120 days, 77 variables and output shape of 41 days, 7 variables(regions). I  utilized a WaveNet like architecture to sling-shot output 41 days ahead. This would mean that I will assume the forecasted 41 days are not correlated with each other. This might not necessarily be the case, but it still gives some promising results.
+
+![CNN_Example](images/dcnn_example.png)
+
+I chose a Poisson loss function and used mean percentage error as my metric. On the test set(2020-11-01 to 2021-01-31), I had a mean percentage error of:
+
+
 
 
 ## Further Steps
