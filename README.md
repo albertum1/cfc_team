@@ -77,8 +77,11 @@ Therefore, a feature that might be interesting would be involving the perimeter 
 
 
 ## Model
-For train-test validation, we will separate 2005-01-01 to 2019-10-31 for our training set and test for 2019-11-01 to 2020-10-31.
+For train-test validation, we will separate 2005-01-01 to 2020-10-31 for our training set and validate on 2020-11-01 to 2021-01-31. We utilized diff
 
+We utilized a Dilated CNN architecture derived from the repo by jEddy92 found [here](https://github.com/JEddy92/TimeSeries_Seq2Seq). <br>
+In short, the model takes 
+The architecture is a variation of the [WaveNet Model](https://deepmind.com/blog/article/wavenet-generative-model-raw-audio)
 
 
 ## Further Steps
