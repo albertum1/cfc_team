@@ -50,11 +50,11 @@ Therefore, the estimated area will be higher than the count of pixelated fire de
 ## Data Exploration
 
 
-![EFA_subplots](images/EFA_subplots.png)
+![EFA_subplots](images/EFA_subplots.png) <br>
 Here I have plotted the daily estimated fire area per region. The land cover area differs for each region, nonetheless, the pattern of daily fire areas are not uniform across all regions.
 
 
-![EFA_subplots](images/EFA_distplots.png)
+![EFA_subplots](images/EFA_distplots.png) <br>
 Like most natural disasters, wildfires often come in power-law like distributions and therefore I log transformed for this plot to see the distributions of each region. This can be quickly interpretted that the distributions of fires are not uniform across the 7 regions.
 
 
@@ -74,16 +74,28 @@ In addition, I will include the mean weather data (such as Temperature, Solar Ra
 
 
 ## Preprocessing 
-The dataset needed to be clipped to a number of sequences that will eventually be inputted into a CNN with dilation. Instead 
+The most recently updated wildfires dataset ranges from 2005-01-01 to 2021-01-18. Since the objective is to forecast up to 2021-02-28, I would need to be able to forecast 41 days to the future(Jan. 19 - Feb. 28 = 41 days). I withheld 2020-12-01 to 2021-01-18 from the training set in order to validate after the model is fit.<br>
+Training Set: 2020-01-01 to 2020-11-30 <br>
+Testing Set: 2020-12-01 to 2021-01-31 <br>
 
-For model validation, I separated 2005-01-01 to 2020-10-31 for my training set and 2020-11-01 to 2021-01-31 for my test set. 
+## Model Evaluation
+The training set needs to be windowed in order to be a valid input into the DCNN model. Essentially, the dataset will be separated into 2 matrices; X and y. <br>
+Initial dataframe shape: (Dates, Features) <br>
+X: (Number of Sequences, Input Steps, Input Features) <br>
+y: (Number of Sequences, Output Steps, Output Features) <br>
 
-I then windowed the dataset with an input shape of 120 days, 77 variables, and an output shape of 41 days, 7 variables(regions). I  utilized a WaveNet like architecture to sling-shot output 41 days ahead. This would mean that I will assume the forecasted 41 days are not correlated with each other. This might not necessarily be the case, but it still gives some promising results.
+I used 120 days of 77 features(estimated fire area, weather statistics, and vegetation index for each region) to output 41 days of 7 estimated fire area regions. I utilized Conv1D layers with dilation to sling-shot 41 days of output. This would mean that the forecasted 41 days are independent of each other and this might not be necessarily what I want. However, the model may still give some promising results.
+
+I utilized this WaveNet like architecture because of it's speed over traditional LSTM and GRU models. The convolution layers are created with sliding kernel inputs. Instead of taking all the inputs(120 days) to create the nodes of the first layer, Conv1D will take adjacent inputs to create each node of the layer. 
+
+In traditional Conv1D architecture, the number of hidden layers will increase one to one with the number of input steps. For example, if I have used 120 days of input with kernel size 2, the first layer will have 119 nodes the second layer 118 nodes and on. 
+
+To combat this problem, the creators of WaveNet utilized increasing dilations between each layer which essentially reduces the number of layers exponentially. Dilation skips nodes at an inputted rate and the unused nodes are not calculated. 
+
 
 ![CNN_Example](images/dcnn_example.png)
 
-I chose a Poisson loss function and used mean percentage error as my metric. On the test set(2020-11-01 to 2021-01-31), I had a mean percentage error of:
-
+After fitting the model, I returned a mean absolute error of 22.89 and mean squared error of 24,000 on my test set, 2020-12-01 to 2020-01-31.
 
 
 
@@ -91,7 +103,5 @@ I chose a Poisson loss function and used mean percentage error as my metric. On 
 For further steps, I would like to first fit an auto regressive DCNN. For this challenge, I took a simpler approach of sling shotting 41 stesp and I'm curious of how much an improvement the model with an autoregressive element.
 In addition, I would like to explore the MODIS14AL1 Thermal Anomalies dataset to have a better understanding of wildfires in a more granulated form. This would require petabytes worth of data, but I believe it can be done using google earth engine. Some of the assumptions that I had to make for this challenge are clearly false given the following
 
-## Conclusions
-
-
 ![2013NDVI](images/Australia2013NDVI.gif)
+
