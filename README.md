@@ -57,9 +57,6 @@ Here I have plotted the daily estimated fire area per region. The land cover are
 ![EFA_subplots](images/EFA_distplots.png)
 Like most natural disasters, wildfires often come in power-law like distributions and therefore I log transformed for this plot to see the distributions of each region. This can be quickly interpretted that the distributions of fires are not uniform across the 7 regions.
 
-![EFA_subplots](images/EFA_MonthlylogScaled.png)
-<br>
-I have plotted the median of each region by month to show the difference of distribution across the regions. It looks as if there might be some seasonality depending on the region selected. Australia has spring season from September to November and summer seasons from December to February.
 
 ## Feature Engineering
 
@@ -76,10 +73,12 @@ Therefore, a feature that might be interesting would be involving the perimeter 
 In addition, I will include the mean weather data (such as Temperature, Solar Radation, Humidity, Precipitation, Windspeed, etc.) per region and assume each region uniformly has the same mean despite difference in location. I will also include the mean vegetation index per region and assume the region uniformly has the same mean vegetation index per region.
 
 
-## Model
+## Preprocessing 
+The dataset needed to be clipped to a number of sequences that will eventually be inputted into a CNN with dilation. Instead 
+
 For model validation, I separated 2005-01-01 to 2020-10-31 for my training set and 2020-11-01 to 2021-01-31 for my test set. 
 
-I then windowed the dataset with an input shape of 120 days, 77 variables and output shape of 41 days, 7 variables(regions). I  utilized a WaveNet like architecture to sling-shot output 41 days ahead. This would mean that I will assume the forecasted 41 days are not correlated with each other. This might not necessarily be the case, but it still gives some promising results.
+I then windowed the dataset with an input shape of 120 days, 77 variables, and an output shape of 41 days, 7 variables(regions). I  utilized a WaveNet like architecture to sling-shot output 41 days ahead. This would mean that I will assume the forecasted 41 days are not correlated with each other. This might not necessarily be the case, but it still gives some promising results.
 
 ![CNN_Example](images/dcnn_example.png)
 
@@ -89,7 +88,10 @@ I chose a Poisson loss function and used mean percentage error as my metric. On 
 
 
 ## Further Steps
+For further steps, I would like to first fit an auto regressive DCNN. For this challenge, I took a simpler approach of sling shotting 41 stesp and I'm curious of how much an improvement the model with an autoregressive element.
+In addition, I would like to explore the MODIS14AL1 Thermal Anomalies dataset to have a better understanding of wildfires in a more granulated form. This would require petabytes worth of data, but I believe it can be done using google earth engine. Some of the assumptions that I had to make for this challenge are clearly false given the following
 
+## Conclusions
 
 
 ![2013NDVI](images/Australia2013NDVI.gif)
