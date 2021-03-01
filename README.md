@@ -11,7 +11,7 @@ The goal of this project is to forecast wildfires in Australia for February 2021
 - VI = Victoria
 - WA = Western Australia
 
-![EFA_subplots](images/Australia.png) <br>
+![EFA_subplots](images/australia.png) <br>
 credit: https://www.touropia.com/regions-in-australia-map/
 
 ## Structure of Repository
