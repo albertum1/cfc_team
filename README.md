@@ -1,8 +1,7 @@
 # Call For Code Spot: Australian Wildfires
-Elvis C, Shruti Chaturvedi, Divyansh Choubisa, Tiffany Sung, Albert Um
 
 ## Objective
-The goal of this project is to forecast wildfires in Australia for February 2021. The estimated fire area represents the summation of fire activity in a 1km by 1km region. The Australian 7 regions are:
+The objective of this project is to forecast wildfires in Australia for February 2021. The estimated fire area represents the summation of fire activity in a 1km by 1km region. The Australian 7 regions are:
 - NSW = New South Wales
 - NT = Northern Territory
 - QL = Queensland
@@ -47,6 +46,11 @@ Therefore, the estimated area will be higher than the count of pixelated fire de
 ![modis14A](https://cdn.earthdata.nasa.gov/conduit/upload/12068/MODIS_fire_ground_observation.png)
 : https://cdn.earthdata.nasa.gov/conduit/upload/12068/MODIS_fire_ground_observation.png
 
+The weather and vegetation data was also aggragagated by mean, min, max, and standard deviation. The following gif represents the NDVI values for Australia in 2020. I included this gif to show how large the original datasets are before compression.
+
+![2013NDVI](images/Australia2013NDVI.gif)
+
+
 ## Data Exploration
 
 
@@ -78,13 +82,15 @@ The most recently updated wildfires dataset ranges from 2005-01-01 to 2021-01-18
 Training Set: 2020-01-01 to 2020-11-30 <br>
 Testing Set: 2020-12-01 to 2021-01-31 <br>
 
-## Model Evaluation
 The training set needs to be windowed in order to be a valid input into the DCNN model. Essentially, the dataset will be separated into 2 matrices; X and y. <br>
 Initial dataframe shape: (Dates, Features) <br>
 X: (Number of Sequences, Input Steps, Input Features) <br>
 y: (Number of Sequences, Output Steps, Output Features) <br>
 
 I used 120 days of 77 features(estimated fire area, weather statistics, and vegetation index for each region) to output 41 days of 7 estimated fire area regions. I utilized Conv1D layers with dilation to sling-shot 41 days of output. This would mean that the forecasted 41 days are independent of each other and this might not be necessarily what I want. However, the model may still give some promising results.
+
+## Model Evaluation
+
 
 I utilized this WaveNet like architecture because of it's speed over traditional LSTM and GRU models. The convolution layers are created with sliding kernel inputs. Instead of taking all the inputs(120 days) to create the nodes of the first layer, Conv1D will take adjacent inputs to create each node of the layer. 
 
@@ -100,8 +106,6 @@ After fitting the model, I returned a mean absolute error of 22.89 and mean squa
 
 
 ## Further Steps
-For further steps, I would like to first fit an auto regressive DCNN. For this challenge, I took a simpler approach of sling shotting 41 stesp and I'm curious of how much an improvement the model with an autoregressive element.
-In addition, I would like to explore the MODIS14AL1 Thermal Anomalies dataset to have a better understanding of wildfires in a more granulated form. This would require petabytes worth of data, but I believe it can be done using google earth engine. Some of the assumptions that I had to make for this challenge are clearly false given the following
-
-![2013NDVI](images/Australia2013NDVI.gif)
+For further steps, I would like to first encorporate an autoregressive element to the model. <br>
+In addition, I would like to reaggregate the wildfires, weather, and vegetation statistics to county(administrative level 2) level or to custom hexagon shapes. This would make the dataset more coarse while still compressing enormous raster images.
 
