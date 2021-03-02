@@ -36,15 +36,10 @@ Nov_10
     └─── :: Contains monthly vegetation values(min, max, mean, variance) 
          :: for each region
 ```
-The Historical_Wildfires dataset is based on the MCD14DL dataset (comprised of MOD14AL1/MYD14AL1, which highlights thermal anomalies with a pixel resolution of 1000 meters). The dataset has daily time intervals ranging from 2005-01-01 to 2020-10-31'. The "estimated fire area" was computed by multiplying the scan and track pixel sizes from the MCD14DL. </br>
+The Historical_Wildfires dataset is based on the MCD14DL dataset (comprised of MOD14AL1/MYD14AL1, which highlights thermal anomalies with a pixel resolution of 1000 meters). The dataset has daily time intervals ranging from 2005-01-01 to 2020-10-31'. The "estimated fire area" was computed by multiplying the scan and track pixel sizes from the MCD14DL. The areas are then totaled by region daily to return the historical wildfires csv. </br>
 
 The pixels from MODIS represent 1km only directly below the satellite, and the scan and track values are calculated due to increasing resolution as the pixels approach the end of the picture. The scan and track represent the spatial resolution east to west and north to south respective. It's important to note that all pixels do not represent 1km in a spatial area, and the resolution increases as the pixels are further away from the center. <br>
 
-Therefore, the estimated area will be higher than the count of pixelated fire derived below:
-
-
-![modis14A](https://cdn.earthdata.nasa.gov/conduit/upload/12068/MODIS_fire_ground_observation.png)
-: https://cdn.earthdata.nasa.gov/conduit/upload/12068/MODIS_fire_ground_observation.png
 
 The weather and vegetation data was also aggragagated by mean, min, max, and standard deviation. The following gif represents the NDVI values for Australia in 2020. I included this gif to show how large the original datasets are before compression.
 
