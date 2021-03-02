@@ -98,7 +98,6 @@ In traditional Conv1D architecture, the number of hidden layers will increase on
 
 To combat this problem, the creators of WaveNet utilized increasing dilations between each layer which essentially reduces the number of layers exponentially. Dilation skips nodes at an inputted rate and the unused nodes are not calculated. 
 
-
 ![CNN_Example](images/dcnn_example.png)
 
 After fitting the model, I returned a mean absolute error of 22.89 and mean squared error of 24,000 on my test set, 2020-12-01 to 2020-01-31.
