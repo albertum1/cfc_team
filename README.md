@@ -75,7 +75,7 @@ In addition, I will include the mean weather data (such as Temperature, Solar Ra
 ## Preprocessing 
 The most recently updated wildfires dataset ranges from 2005-01-01 to 2021-01-18. Since the objective is to forecast up to 2021-02-28, I would need to be able to forecast 41 days to the future(Jan. 19 - Feb. 28 = 41 days). I withheld 2020-12-01 to 2021-01-18 from the training set in order to validate after the model is fit.<br>
 Training Set: 2020-01-01 to 2020-11-30 <br>
-Testing Set: 2020-12-01 to 2021-01-31 <br>
+Testing Set: 2020-12-01 to 2021-01-11 <br>
 
 The training set needs to be windowed in order to be a valid input into the DCNN model. Essentially, the dataset will be separated into 2 matrices; X and y. <br>
 Initial dataframe shape: (Dates, Features) <br>
@@ -84,10 +84,10 @@ y: (Number of Sequences, Output Steps, Output Features) <br>
 
 I used 120 days of 77 features(estimated fire area, weather statistics, and vegetation index for each region) to output 41 days of 7 estimated fire area regions. I utilized Conv1D layers with dilation to sling-shot 41 days of output. This would mean that the forecasted 41 days are independent of each other and this might not be necessarily what I want. However, the model may still give some promising results.
 
-## Model Evaluation
+## Model
 
 
-I utilized this WaveNet like architecture because of it's speed over traditional LSTM and GRU models. The convolution layers are created with sliding kernel inputs. Instead of taking all the inputs(120 days) to create the nodes of the first layer, Conv1D will take adjacent inputs to create each node of the layer. 
+I utilized a WaveNet like architecture because of it's speed over traditional LSTM and GRU models. The convolution layers are created with sliding kernel inputs. Instead of taking all the inputs(120 days) to create the nodes of the first layer, Conv1D will take adjacent inputs to create each node of the layer. 
 
 In traditional Conv1D architecture, the number of hidden layers will increase one to one with the number of input steps. For example, if I have used 120 days of input with kernel size 2, the first layer will have 119 nodes the second layer 118 nodes and on. 
 
@@ -95,8 +95,7 @@ To combat this problem, the creators of WaveNet utilized increasing dilations be
 
 ![CNN_Example](images/dcnn_example.png)
 
-After fitting the model, I returned a mean absolute error of 22.89 and mean squared error of 24,000 on my test set, 2020-12-01 to 2020-01-31.
-
+The model had a mean absolute error of 21.07 and root mean squared error of 66.47 for the test set, December 01, 2020 - January 11, 2021. The final competition submission dates, February 01, 2021 - February 28, 2021, had a mean absolute error of 7.03 and rmse of 19.60. The stark contrast in evaluation scores may be explained due to the seasonal shift from December to February. The wildfires in December tend to be more robust due to warmer climate sthan February.
 
 
 ## Further Steps
