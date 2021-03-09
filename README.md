@@ -68,6 +68,7 @@ Therefore, a feature that might be interesting would be involving the perimeter 
 1. Assume the fire is conglomerated into one region and take the square root of the estimated area(leaving out the constants) as a feature.
 2. Assume the count of fires are all separated and have equal radius/length/height (No pixel of detected fire will touch another pixel). The feature will be created by square rooting the (fire area/ pixel count) then multiplying the pixel count to get the summation of the perimeters.
 
+![surface_area](images/surface_area.png)
 
 In addition, I will include the mean weather data (such as Temperature, Solar Radation, Humidity, Precipitation, Windspeed, etc.) per region and assume each region uniformly has the same mean despite difference in location. I will also include the mean vegetation index per region and assume the region uniformly has the same mean vegetation index per region.
 
