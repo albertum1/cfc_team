@@ -83,7 +83,18 @@ Initial dataframe shape: (Dates, Features) <br>
 X: (Number of Sequences, Input Steps, Input Features) <br>
 y: (Number of Sequences, Output Steps, Output Features) <br>
 
-I used 120 days of 77 features(estimated fire area, weather statistics, and vegetation index for each region) to output 41 days of 7 estimated fire area regions. I utilized Conv1D layers with dilation to sling-shot 41 days of output. This would mean that the forecasted 41 days are independent of each other and this might not be necessarily what I want. However, the model may still give some promising results.
+
+![surface_area](images/windowing.png)
+
+I used 120 days of 77(7 regions x 11 features) features to output 41 days of 7 estimated fire area regions. <br>
+1. 6 weather related means
+    - precipitation, humidity, soil water content, radiation, temperature, and wind speed
+2. 1 NDVI means
+3. 2 Surface Area Features
+4. 1 Estimated fire area
+5. 1 fire pixel counts
+
+I utilized Conv1D layers with dilation to sling-shot 41 days of output. This would mean that the forecasted 41 days are independent of each other and this might not be necessarily what I want. However, the model may still give some promising results.
 
 ## Model
 
